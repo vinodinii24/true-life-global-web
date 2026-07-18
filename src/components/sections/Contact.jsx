@@ -1,0 +1,288 @@
+import React, { useRef, useState } from "react";
+import emailjs from "@emailjs/browser";
+import { motion } from 'framer-motion';
+import { Mail, Phone, MapPin, ArrowRight, Clock } from 'lucide-react';
+
+export default function Contact() {
+  const formRef = useRef();
+  const [loading, setLoading] = useState(false);
+  const [status, setStatus] = useState("");
+
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    company: "",
+    service: "",
+    message: ""
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setStatus("");
+
+    emailjs.sendForm(
+        "service_8p6vfza",
+        "template_agctxli",
+        formRef.current,
+        {
+          publicKey: "8kCSjYMF5jaYT8bX9",
+        }
+      )
+      .then(() => {
+        setStatus("Message sent successfully!");
+        setLoading(false);
+        setFormData({
+          name: "",
+          email: "",
+          company: "",
+          service: "",
+          message: ""
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+        setStatus("Failed to send message.");
+        setLoading(false);
+      });
+  };
+
+  return (
+    <section 
+      id="contact" 
+      className="relative bg-[#F8FAFC] text-[#0F172A] py-24 sm:py-32 overflow-hidden border-t border-slate-200"
+      aria-labelledby="contact-heading"
+    >
+      <div className="absolute bottom-0 left-0 w-[60vw] h-[60vw] bg-[radial-gradient(circle,rgba(29,78,216,0.015),transparent_70%)] pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
+        
+        {/* Header Node Framework */}
+        <div className="text-center max-w-3xl mx-auto mb-20">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6 }}
+          >
+            <span className="font-mono text-xs font-bold tracking-widest text-[#1D4ED8] uppercase mb-3 block">
+              Engagement Portal // Institutional Access
+            </span>
+            <h2 
+              id="contact-heading" 
+              className="font-display text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-[#0F172A] mb-6"
+            >
+              Get in Touch
+            </h2>
+            <div className="w-12 h-1 bg-[#1D4ED8] rounded-full mx-auto mb-6" />
+            <p className="font-sans text-base sm:text-lg text-[#64748B] leading-relaxed font-medium">
+              Reach out for a free consultation. We respond within 1 business day.
+            </p>
+          </motion.div>
+        </div>
+
+        {/* Dual Column Configuration Infrastructure */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-stretch">
+          
+          {/* Left Column Architecture */}
+          <div className="lg:col-span-5 flex flex-col justify-between space-y-8">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.5 }}
+              className="bg-slate border border-slate-200/80 p-8 sm:p-10 rounded-3xl shadow-[0_8px_30px_rgba(15,23,42,0.015)] flex-1 flex flex-col justify-between"
+            >
+              <div>
+                <h3 className="font-display text-2xl font-bold tracking-tight text-[#0F172A] mb-8">
+                  Contact Information
+                </h3>
+                
+                <div className="space-y-6">
+                  {/* Info Row 1 */}
+                  <div className="flex gap-4 items-start group">
+                    <div className="w-10 h-10 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/20 flex items-center justify-center text-[#D4AF37] shrink-0 transition-colors duration-300 group-hover:bg-[#1D4ED8] group-hover:text-white group-hover:border-[#1D4ED8]">
+                      <Mail className="w-4 h-4" aria-hidden="true" />
+                    </div>
+                    <div>
+                      <p className="font-mono text-[10px] uppercase font-bold tracking-widest text-slate-400">Email</p>
+                      <p className="font-sans text-base text-[#0F172A] font-semibold mt-0.5">To be confirmed</p>
+                    </div>
+                  </div>
+
+                  {/* Info Row 2 */}
+                  <div className="flex gap-4 items-start group">
+                    <div className="w-10 h-10 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/20 flex items-center justify-center text-[#D4AF37] shrink-0 transition-colors duration-300 group-hover:bg-[#1D4ED8] group-hover:text-white group-hover:border-[#1D4ED8]">
+                      <Phone className="w-4 h-4" aria-hidden="true" />
+                    </div>
+                    <div>
+                      <p className="font-mono text-[10px] uppercase font-bold tracking-widest text-slate-400">Phone</p>
+                      <p className="font-sans text-base text-[#0F172A] font-semibold mt-0.5">To be confirmed</p>
+                    </div>
+                  </div>
+
+                  {/* Info Row 3 */}
+                  <div className="flex gap-4 items-start group">
+                    <div className="w-10 h-10 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/20 flex items-center justify-center text-[#D4AF37] shrink-0 transition-colors duration-300 group-hover:bg-[#1D4ED8] group-hover:text-white group-hover:border-[#1D4ED8]">
+                      <MapPin className="w-4 h-4" aria-hidden="true" />
+                    </div>
+                    <div>
+                      <p className="font-mono text-[10px] uppercase font-bold tracking-widest text-slate-400">Registered Office</p>
+                      <p className="font-sans text-sm sm:text-base text-[#0F172A] font-semibold mt-0.5 leading-relaxed">
+                        1003 Toa Payoh Industrial Park, #07-1501, Singapore 319075
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Operating Block Integration */}
+              <div className="mt-10 pt-8 border-t border-slate-100 flex gap-4 items-start">
+                <div className="w-10 h-10 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center text-slate-400 shrink-0">
+                  <Clock className="w-4 h-4" aria-hidden="true" />
+                </div>
+                <div>
+                  <h4 className="font-display text-sm font-bold text-[#0F172A] tracking-tight mb-2">
+                    Operating Hours
+                  </h4>
+                  <div className="font-sans text-xs text-[#64748B] font-semibold space-y-1">
+                    <p>Mon–Fri: 9:00 AM – 6:00 PM</p>
+                    <p>Sat: 9:00 AM – 1:00 PM</p>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Right Column Architecture */}
+          <div className="lg:col-span-7">
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.5 }}
+              className="bg-slate border border-slate-200 p-8 sm:p-10 rounded-3xl shadow-[0_8px_30px_rgba(15,23,42,0.015)] hover:border-slate-300/80 transition-all duration-300"
+            >
+              <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
+                
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  {/* Full Name Node */}
+                  <div>
+                    <label htmlFor="fullName" className="block font-sans text-xs font-bold text-[#0F172A] uppercase tracking-wider mb-2">
+                      Full Name *
+                    </label>
+                    <input
+                      type="text"
+                      id="fullName"
+                      name="name"
+                      required
+                      value={formData.name}
+                      onChange={handleChange}
+                      placeholder="Your name"
+                      className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 font-sans text-sm font-medium text-[#0F172A] placeholder-slate-400 focus:outline-none focus:border-[#1D4ED8] focus:bg-slate transition-colors duration-200"
+                    />
+                  </div>
+
+                  {/* Email Node */}
+                  <div>
+                    <label htmlFor="email" className="block font-sans text-xs font-bold text-[#0F172A] uppercase tracking-wider mb-2">
+                      Email Address *
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      required
+                      value={formData.email}
+                      onChange={handleChange}
+                      placeholder="your@email.com"
+                      className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 font-sans text-sm font-medium text-[#0F172A] placeholder-slate-400 focus:outline-none focus:border-[#1D4ED8] focus:bg-slate transition-colors duration-200"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  {/* Company Name Node */}
+                  <div>
+                    <label htmlFor="companyName" className="block font-sans text-xs font-bold text-[#0F172A] uppercase tracking-wider mb-2">
+                      Company Name
+                    </label>
+                    <input
+                      type="text"
+                      id="companyName"
+                      name="company"
+                      value={formData.company}
+                      onChange={handleChange}
+                      placeholder="Your company"
+                      className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 font-sans text-sm font-medium text-[#0F172A] placeholder-slate-400 focus:outline-none focus:border-[#1D4ED8] focus:bg-slate transition-colors duration-200"
+                    />
+                  </div>
+
+                  {/* Service Needed Node */}
+                  <div>
+                    <label htmlFor="serviceNeeded" className="block font-sans text-xs font-bold text-[#0F172A] uppercase tracking-wider mb-2">
+                      Service Needed
+                    </label>
+                    <input
+                      type="text"
+                      id="serviceNeeded"
+                      name="service"
+                      value={formData.service}
+                      onChange={handleChange}
+                      placeholder="Accounting, Tax, Courier..."
+                      className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 font-sans text-sm font-medium text-[#0F172A] placeholder-slate-400 focus:outline-none focus:border-[#1D4ED8] focus:bg-slate transition-colors duration-200"
+                    />
+                  </div>
+                </div>
+
+                {/* Message Node */}
+                <div>
+                  <label htmlFor="message" className="block font-sans text-xs font-bold text-[#0F172A] uppercase tracking-wider mb-2">
+                    Message *
+                  </label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    required
+                    rows="4"
+                    value={formData.message}
+                    onChange={handleChange}
+                    placeholder="Tell us about your requirements..."
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 font-sans text-sm font-medium text-[#0F172A] placeholder-slate-400 focus:outline-none focus:border-[#1D4ED8] focus:bg-slate transition-colors duration-200 resize-none"
+                  />
+                </div>
+
+                {/* Status Message */}
+                {status && (
+                  <p className={`text-center text-sm ${status.includes("successfully") ? "text-green-600" : "text-red-600"}`}>
+                    {status}
+                  </p>
+                )}
+
+                {/* Send Button */}
+                <motion.button
+                  type="submit"
+                  whileHover={{ scale: 1.01 }}
+                  whileTap={{ scale: 0.99 }}
+                  disabled={loading}
+                  className="w-full inline-flex items-center justify-center px-8 py-4 rounded-xl bg-[#1D4ED8] text-white font-bold disabled:bg-blue-400 disabled:cursor-not-allowed"
+                >
+                  {loading ? "Sending..." : "Send Message"}
+                  <ArrowRight className="w-5 h-5 ml-3" />
+                </motion.button>
+
+              </form>
+            </motion.div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+  );
+}

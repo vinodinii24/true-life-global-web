@@ -46,12 +46,12 @@ const fadeUpVariants = {
 export default function Leadership() {
   return (
     <section 
-      id="director" 
+      id="leadership" 
       className="relative bg-[#F8FAFC] text-[#0F172A] py-24 sm:py-32 overflow-hidden border-t border-slate-200"
       aria-labelledby="leadership-heading"
     >
       {/* Editorial Decorative Watermark Background */}
-      <div className="absolute top-0 right-0 transform translate-x-1/3 -translate-y-1/3 font-display text-[18vw] font-black text-slate-200/40 select-none pointer-events-none tracking-tighter">
+      <div className="absolute top-0 right-0 transform translate-x-1/3 -translate-y-1/3 font-sans text-[18vw] font-black text-slate-200/40 select-none pointer-events-none tracking-tighter">
         TRUE LIFE
       </div>
 
@@ -65,16 +65,16 @@ export default function Leadership() {
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6 }}
           >
-            <span className="font-mono text-xs font-bold tracking-widest text-[#1D4ED8] uppercase mb-3 block">
+            <span className="font-sans text-xs font-bold tracking-[6px] text-[#1D4ED8] uppercase mb-3 block">
               Our Leadership // Executive Governance
             </span>
             <h2 
               id="leadership-heading" 
-              className="font-display text-4xl sm:text-5xl font-extrabold tracking-tight text-[#0F172A]"
+              className="font-serif text-4xl sm:text-5xl font-extrabold tracking-tight text-[#0F172A]"
             >
               Founder & CEO
             </h2>
-            <div className="w-12 h-1 bg-[#1D4ED8] rounded-full mt-4" />
+            <div className="w-12 h-[2px] bg-[#1D4ED8] rounded-full mt-4" />
           </motion.div>
         </div>
 
@@ -101,13 +101,12 @@ export default function Leadership() {
             </div>
 
             <div className="mt-6 text-center lg:text-left w-full">
-              <h3 className="font-display text-2xl font-bold tracking-tight text-[#0F172A]">
+              <h3 className="font-sans text-2xl font-bold tracking-tight text-[#0F172A]">
                 Soundarrajan Vaithiyanathan
               </h3>
-              <p className="font-mono text-xs font-bold uppercase tracking-wider text-[#1D4ED8] mt-1.5">
+              <p className="font-sans text-xs font-bold uppercase tracking-wider text-[#1D4ED8] mt-1.5">
                 Founder & Chief Executive Officer
               </p>
-              
             </div>
           </motion.div>
 
@@ -118,7 +117,7 @@ export default function Leadership() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="font-sans text-base text-slate-600 leading-relaxed space-y-6 font-medium"
+              className="font-sans text-base text-slate-600 leading-relaxed space-y-6 font-normal"
             >
               <p>
                 Soundarrajan Vaithiyanathan is the visionary Founder and Chief Executive Officer of True Life Global Pte. Ltd., a Singapore-incorporated company delivering integrated accounting and logistics services. With over 14 years of progressive financial and operations experience across multinational corporations in Singapore and India, he brings deep expertise in financial management, compliance, and business operations to every client engagement.
@@ -129,7 +128,7 @@ export default function Leadership() {
               <p>
                 He is a certified US GAAP professional from Ernst & Young (2026) and holds a Master of Business Administration (MBA), reinforcing his commitment to professional excellence.
               </p>
-              <p className="border-l-2 border-[#1D4ED8] pl-4 italic text-slate-700 bg-slate-50 py-2 rounded-r-xl">
+              <p className="border-l-2 border-[#1D4ED8] pl-4 italic text-slate-700 bg-slate-50 py-3 rounded-r-xl">
                 Driven by a passion for empowering SMEs and individuals with reliable financial guidance and seamless logistics solutions, Soundarrajan founded True Life Global to bridge the gap between professional financial services and everyday business needs in Singapore.
               </p>
             </motion.div>
@@ -149,16 +148,16 @@ export default function Leadership() {
                     key={idx}
                     variants={fadeUpVariants}
                     whileHover={{ y: -4, transition: { duration: 0.2 } }}
-                    className="p-5 rounded-2xl bg-slate border border-slate-200/80 shadow-[0_4px_20px_rgba(15,23,42,0.02)] flex items-start space-x-4 transition-all duration-300 hover:border-slate-300 hover:shadow-[0_10px_30px_rgba(15,23,42,0.04)]"
+                    className="p-5 rounded-2xl bg-white border border-slate-200/80 shadow-[0_4px_20px_rgba(15,23,42,0.02)] flex items-start space-x-4 transition-all duration-300 hover:border-slate-300 hover:shadow-[0_10px_30px_rgba(15,23,42,0.04)]"
                   >
                     <div className="p-2.5 rounded-xl bg-slate-50 border border-slate-100 text-[#1D4ED8] shrink-0">
                       <IconComponent className="w-5 h-5" aria-hidden="true" />
                     </div>
                     <div>
-                      <h4 className="font-display text-sm font-bold text-[#0F172A] tracking-tight">
+                      <h4 className="font-sans text-sm font-bold text-[#0F172A] tracking-tight">
                         {card.title}
                       </h4>
-                      <p className="font-sans text-xs text-slate-500 mt-1 leading-relaxed font-medium">
+                      <p className="font-sans text-xs text-slate-500 mt-1 leading-relaxed font-normal">
                         {card.description}
                       </p>
                     </div>

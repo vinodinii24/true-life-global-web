@@ -7,7 +7,7 @@ export default function AboutSection() {
     hidden: {},
     visible: {
       transition: {
-        staggerChildren: 0.15,
+        staggerChildren: 0.12,
       },
     },
   };
@@ -17,7 +17,7 @@ export default function AboutSection() {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: "easeOut" },
+      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
     },
   };
 
@@ -26,21 +26,25 @@ export default function AboutSection() {
       id="about"
       className="relative py-24 sm:py-32 px-6 overflow-hidden bg-[#1D3557]"
     >
+      {/* Premium Background Ambience Orbs */}
+      <div className="absolute top-1/4 -left-32 w-96 h-96 bg-gradient-to-tr from-[#1D4ED8]/10 to-transparent rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-gradient-to-bl from-[#D4AF37]/5 to-transparent rounded-full blur-3xl pointer-events-none" />
+
       <div className="max-w-7xl mx-auto relative z-10">
         
         {/* Header Infrastructure */}
         <div className="text-center max-w-4xl mx-auto mb-20">
           <motion.div
-            initial={{ opacity: 0, y: 25 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.7, ease: "easeOut" }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
             <span className="font-sans text-xs font-bold tracking-[6px] text-[#D4AF37] uppercase mb-4 block">
               About Us
             </span>
-            <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white mb-6">
-              True Life Global <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] to-[#AA7C11]">Pte. Ltd.</span>
+            <h2 className="font-sans text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white mb-6">
+              True Life Global <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#AA7C11]">Pte. Ltd.</span>
             </h2>
             
             {/* Animated Gold Underline */}
@@ -48,11 +52,11 @@ export default function AboutSection() {
               initial={{ width: 0 }}
               whileInView={{ width: "80px" }}
               viewport={{ once: true }}
-              transition={{ delay: 0.3, duration: 0.7, ease: "easeOut" }}
+              transition={{ delay: 0.2, duration: 0.6, ease: "easeOut" }}
               className="h-[2px] bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent mx-auto mb-8"
             />
             
-            <p className="font-sans text-base sm:text-lg text-slate-300 leading-relaxed font-normal max-w-3xl mx-auto">
+            <p className="font-sans text-base sm:text-lg text-slate-300/90 leading-relaxed font-normal max-w-3xl mx-auto">
               True Life Global Pte. Ltd. is a Singapore-based professional services company providing reliable accounting, auditing, tax consultancy, and corporate support solutions. We help businesses achieve compliance, operational efficiency, and sustainable growth through trusted expertise.
             </p>
           </motion.div>
@@ -64,25 +68,25 @@ export default function AboutSection() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 items-stretch"
         >
           {/* Card 1: Our Company */}
           <motion.div
             variants={cardVariants}
-            whileHover={{ y: -6, boxShadow: "0 20px 40px rgba(0, 0, 0, 0.2)" }}
-            className="group relative rounded-3xl bg-white/5 border border-white/10 hover:border-[#D4AF37]/40 hover:bg-white/10 p-8 sm:p-10 backdrop-blur-xl transition-all duration-300 flex flex-col"
+            whileHover={{ y: -4 }}
+            className="group relative rounded-2xl bg-white/[0.03] border border-white/10 hover:border-[#D4AF37]/30 hover:bg-white/[0.06] p-8 sm:p-10 backdrop-blur-xl transition-all duration-300 flex flex-col shadow-[0_4px_30px_rgba(0,0,0,0.1)]"
           >
-            <div className="absolute inset-0 rounded-3xl bg-[radial-gradient(circle_at_30%_20%,rgba(212,175,55,0.06),transparent_50%)] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+            <div className="absolute inset-0 rounded-2xl bg-[radial-gradient(circle_at_30%_20%,rgba(212,175,55,0.04),transparent_50%)] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
             
-            <div className="w-12 h-12 rounded-2xl bg-white/10 border border-[#D4AF37]/30 flex items-center justify-center text-[#D4AF37] mb-6 shrink-0 transition-transform duration-300 group-hover:scale-105 shadow-sm">
-              <Building2 className="w-5 h-5" aria-hidden="true" />
+            <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-[#D4AF37] mb-6 shrink-0 transition-colors duration-300 group-hover:border-[#D4AF37]/30 group-hover:bg-white/10 shadow-sm">
+              <Building2 className="w-5 h-5 transition-transform duration-300 group-hover:scale-105" aria-hidden="true" />
             </div>
 
-            <h3 className="font-serif text-xl font-bold tracking-tight text-white mb-4">
+            <h3 className="font-sans text-xl font-bold tracking-tight text-white mb-4">
               Our Company
             </h3>
 
-            <p className="font-sans text-sm text-slate-300 leading-relaxed font-medium">
+            <p className="font-sans text-sm text-slate-300/80 leading-relaxed font-medium">
               We provide professional accounting, auditing, taxation, and corporate services with absolute integrity, accuracy, and corporate commitment.
             </p>
           </motion.div>
@@ -90,20 +94,20 @@ export default function AboutSection() {
           {/* Card 2: Our Vision */}
           <motion.div
             variants={cardVariants}
-            whileHover={{ y: -6, boxShadow: "0 20px 40px rgba(0, 0, 0, 0.2)" }}
-            className="group relative rounded-3xl bg-white/5 border border-white/10 hover:border-[#D4AF37]/40 hover:bg-white/10 p-8 sm:p-10 backdrop-blur-xl transition-all duration-300 flex flex-col"
+            whileHover={{ y: -4 }}
+            className="group relative rounded-2xl bg-white/[0.03] border border-white/10 hover:border-[#D4AF37]/30 hover:bg-white/[0.06] p-8 sm:p-10 backdrop-blur-xl transition-all duration-300 flex flex-col shadow-[0_4px_30px_rgba(0,0,0,0.1)]"
           >
-            <div className="absolute inset-0 rounded-3xl bg-[radial-gradient(circle_at_30%_20%,rgba(212,175,55,0.06),transparent_50%)] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+            <div className="absolute inset-0 rounded-2xl bg-[radial-gradient(circle_at_30%_20%,rgba(212,175,55,0.04),transparent_50%)] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
 
-            <div className="w-12 h-12 rounded-2xl bg-white/10 border border-[#D4AF37]/30 flex items-center justify-center text-[#D4AF37] mb-6 shrink-0 transition-transform duration-300 group-hover:scale-105 shadow-sm">
-              <Eye className="w-5 h-5" aria-hidden="true" />
+            <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-[#D4AF37] mb-6 shrink-0 transition-colors duration-300 group-hover:border-[#D4AF37]/30 group-hover:bg-white/10 shadow-sm">
+              <Eye className="w-5 h-5 transition-transform duration-300 group-hover:scale-105" aria-hidden="true" />
             </div>
 
-            <h3 className="font-serif text-xl font-bold tracking-tight text-white mb-4">
+            <h3 className="font-sans text-xl font-bold tracking-tight text-white mb-4">
               Our Vision
             </h3>
 
-            <p className="font-sans text-sm text-slate-300 leading-relaxed font-medium">
+            <p className="font-sans text-sm text-slate-300/80 leading-relaxed font-medium">
               To become a trusted global partner empowering enterprise ecosystems through modern financial intelligence and corporate solutions.
             </p>
           </motion.div>
@@ -111,20 +115,20 @@ export default function AboutSection() {
           {/* Card 3: Our Mission */}
           <motion.div
             variants={cardVariants}
-            whileHover={{ y: -6, boxShadow: "0 20px 40px rgba(0, 0, 0, 0.2)" }}
-            className="group relative rounded-3xl bg-white/5 border border-white/10 hover:border-[#D4AF37]/40 hover:bg-white/10 p-8 sm:p-10 backdrop-blur-xl transition-all duration-300 flex flex-col md:col-span-2 lg:col-span-1"
+            whileHover={{ y: -4 }}
+            className="group relative rounded-2xl bg-white/[0.03] border border-white/10 hover:border-[#D4AF37]/30 hover:bg-white/[0.06] p-8 sm:p-10 backdrop-blur-xl transition-all duration-300 flex flex-col md:col-span-2 lg:col-span-1 shadow-[0_4px_30px_rgba(0,0,0,0.1)]"
           >
-            <div className="absolute inset-0 rounded-3xl bg-[radial-gradient(circle_at_30%_20%,rgba(212,175,55,0.06),transparent_50%)] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+            <div className="absolute inset-0 rounded-2xl bg-[radial-gradient(circle_at_30%_20%,rgba(212,175,55,0.04),transparent_50%)] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
 
-            <div className="w-12 h-12 rounded-2xl bg-white/10 border border-[#D4AF37]/30 flex items-center justify-center text-[#D4AF37] mb-6 shrink-0 transition-transform duration-300 group-hover:scale-105 shadow-sm">
-              <Target className="w-5 h-5" aria-hidden="true" />
+            <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-[#D4AF37] mb-6 shrink-0 transition-colors duration-300 group-hover:border-[#D4AF37]/30 group-hover:bg-white/10 shadow-sm">
+              <Target className="w-5 h-5 transition-transform duration-300 group-hover:scale-105" aria-hidden="true" />
             </div>
 
-            <h3 className="font-serif text-xl font-bold tracking-tight text-white mb-4">
+            <h3 className="font-sans text-xl font-bold tracking-tight text-white mb-4">
               Our Mission
             </h3>
 
-            <p className="font-sans text-sm text-slate-300 leading-relaxed font-medium">
+            <p className="font-sans text-sm text-slate-300/80 leading-relaxed font-medium">
               Deliver comprehensive, expert services that simplify regulatory compliance and help modern businesses scale with absolute confidence.
             </p>
           </motion.div>

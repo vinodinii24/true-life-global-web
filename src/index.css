@@ -171,3 +171,21 @@ body {
   background-size: 250% 100%;
   animation: gradientMove 4s linear infinite;
 }
+
+.premium-slider-layer {
+  will-change: opacity, transform;
+  transform: scale(1.08) translateZ(0);
+}
+
+.premium-slider-layer.active-zoom {
+  animation: premiumKenBurns 6000ms linear forwards;
+}
+
+@keyframes premiumKenBurns {
+  0% {
+    transform: scale(1) translateZ(0);
+  }
+  100% {
+    transform: scale(1.08) translateZ(0);
+  }
+}

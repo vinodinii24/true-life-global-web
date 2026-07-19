@@ -10,7 +10,6 @@ import Howwework from "./components/sections/Howwework";
 import Leadership from "./components/sections/Leadership";
 import WhyChooseUs from "./components/sections/WhyChooseUs";
 import VisionMission from "./components/sections/VisionMission";
-import Testimonals from "./components/sections/Testimonals";
 import Insights from "./components/sections/Insights";
 import Careers from "./components/sections/Careers";
 import FAQ from "./components/sections/FAQ";
@@ -67,11 +66,10 @@ function App() {
 
         <WhyChooseUs />
 
+        {/* Keeping the first "What Our Clients Say" section component */}
         <VisionMission />
 
         <WaveDivider />
-
-        <Testimonals />
 
         <Insights />
 

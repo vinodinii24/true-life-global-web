@@ -55,12 +55,12 @@ const cardVariants = {
 export default function WhyChooseUs() {
   return (
     <section 
-      id="why-us" 
-      className="relative bg-[#F8FAFC] text-[#0F172A] py-24 sm:py-32 overflow-hidden border-t border-slate-200"
+      id="why-choose-us" 
+      className="relative bg-[#0B132B] text-white py-24 sm:py-32 overflow-hidden border-t border-slate-800"
       aria-labelledby="why-choose-heading"
     >
       {/* Background Micro Geometry Elements */}
-      <div className="absolute inset-0 opacity-[0.02] bg-[radial-gradient(#1D4ED8_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
+      <div className="absolute inset-0 opacity-[0.03] bg-[radial-gradient(#4FACFE_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         
@@ -72,18 +72,18 @@ export default function WhyChooseUs() {
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6 }}
           >
-            <span className="font-mono text-xs font-bold tracking-widest text-[#1D4ED8] uppercase mb-3 block">
-              Strategic Value Value Proposition // Value Architecture
+            <span className="font-sans text-xs font-bold tracking-[6px] text-[#E2C044] uppercase mb-4 block">
+              Strategic Value Proposition // Value Architecture
             </span>
             <h2 
               id="why-choose-heading" 
-              className="font-display text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-[#0F172A] mb-6"
+              className="font-serif text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white mb-6"
             >
-              Why Choose True Life Global Pte. Ltd.?
+              Why Choose True Life Global?
             </h2>
-            <div className="w-12 h-1 bg-[#1D4ED8] rounded-full mx-auto mb-6" />
-            <p className="font-sans text-base sm:text-lg text-slate-500 leading-relaxed font-medium">
-              A Singapore-registered company delivering trusted financial expertise and reliable courier support for modern businesses.
+            <div className="w-16 h-[2px] bg-gradient-to-r from-[#1D4ED8] to-[#E2C044] rounded-full mx-auto mb-6" />
+            <p className="font-sans text-base sm:text-lg text-slate-300 leading-relaxed font-normal">
+              A registered Singapore partner delivering trusted financial compliance expertise alongside agile logistics operations.
             </p>
           </motion.div>
         </div>
@@ -103,27 +103,27 @@ export default function WhyChooseUs() {
                 key={index}
                 variants={cardVariants}
                 whileHover={{ y: -5, transition: { duration: 0.2 } }}
-                className="group relative bg-slate border border-slate-200 p-8 rounded-2xl shadow-[0_4px_30px_rgba(15,23,42,0.015)] transition-all duration-300 hover:border-slate-300 hover:shadow-[0_15px_40px_rgba(15,23,42,0.04)]"
+                className="group relative bg-[#1C2541]/60 backdrop-blur-sm border border-slate-800/80 p-8 rounded-2xl shadow-[0_4px_30px_rgba(0,0,0,0.2)] transition-all duration-300 hover:border-slate-700 hover:shadow-[0_15px_40px_rgba(29,78,216,0.15)]"
               >
                 {/* Dynamic Accent Visual Overlay */}
-                <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#1D4ED8] to-[#4facfe] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 rounded-t-2xl origin-left" />
+                <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#1D4ED8] to-[#4FACFE] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 rounded-t-2xl origin-left" />
 
                 {/* Badge Icon System */}
-                <div className="w-12 h-12 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-center text-[#1D4ED8] mb-6 transition-all duration-300 group-hover:bg-slate-900 group-hover:text-white">
+                <div className="w-12 h-12 rounded-xl bg-[#0B132B] border border-slate-800 flex items-center justify-center text-[#4FACFE] mb-6 transition-all duration-300 group-hover:bg-[#4FACFE] group-hover:text-[#0B132B]">
                   <Icon className="w-5 h-5 transition-transform duration-300 group-hover:scale-110" aria-hidden="true" />
                 </div>
 
                 {/* Text Block Content */}
-                <h3 className="font-display text-lg font-bold text-[#0F172A] mb-3 tracking-tight group-hover:text-[#1D4ED8] transition-colors duration-200">
+                <h3 className="font-sans text-lg font-bold text-white mb-3 tracking-tight group-hover:text-[#4FACFE] transition-colors duration-200">
                   {advantage.title}
                 </h3>
                 
-                <p className="font-sans text-sm text-slate-500 leading-relaxed font-medium">
+                <p className="font-sans text-sm text-slate-300 leading-relaxed font-normal">
                   {advantage.content}
                 </p>
 
                 {/* Bottom Highlight Anchor */}
-                <div className="absolute bottom-4 right-4 w-1.5 h-1.5 rounded-full bg-slate group-hover:bg-[#D4AF37] transition-colors duration-300" />
+                <div className="absolute bottom-4 right-4 w-1.5 h-1.5 rounded-full bg-slate-800 group-hover:bg-[#E2C044] transition-colors duration-300" />
               </motion.article>
             );
           })}

@@ -11,13 +11,14 @@ export default function Navbar() {
   
   const navRef = useRef(null);
 
+  // 🎯 FIXED: Updated paths to match the exact structural HTML IDs used in sections
   const navigationLinks = [
     { label: "Home", path: "#" },
     { label: "About Us", path: "#about" },
     { label: "Services", path: "#services" },
     { label: "How We Work", path: "#how-we-work" },
-    { label: "Director", path: "#director" },
-    { label: "Why Us", path: "#why-us" },
+    { label: "Director", path: "#leadership" },    // Matches id="leadership" in Leadership.jsx
+    { label: "Why Us", path: "#why-choose-us" },  // Matches id="why-choose-us" in WhyChooseUs.jsx
     { label: "Careers", path: "#careers" },
     { label: "Insights", path: "#insights" },
   ];
@@ -216,6 +217,7 @@ export default function Navbar() {
                   <div key={idx} className="border-b border-slate-100 pb-3">
                     <div className="flex flex-col">
                       <a
+                        document-target="mobile-anchor"
                         href={link.path}
                         onClick={() => !link.children && setIsOpen(false)}
                         className={`font-display text-2xl font-bold transition-colors flex items-center justify-between ${

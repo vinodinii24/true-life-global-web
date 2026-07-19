@@ -143,23 +143,25 @@ export default function HeroSection() {
           
           {/* Action Interactive Triggers */}
           <div ref={ctaRef} className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
-            <motion.button 
-              whileHover={{ scale: 1.02, y: -2 }}
-              whileTap={{ scale: 0.98 }}
-              className="group relative overflow-hidden px-8 py-4 rounded-xl bg-gradient-to-r from-[#1D3557] to-[#1D4ED8] text-white font-sans text-sm font-bold shadow-lg shadow-[#1D3557]/10 hover:shadow-[#1D4ED8]/20 transition-all duration-300 flex items-center justify-center gap-2"
-            >
-              <span>Book a Consultation</span>
-              <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-            </motion.button>
+            <motion.a
+  href="#contact"
+  whileHover={{ scale: 1.02, y: -2 }}
+  whileTap={{ scale: 0.98 }}
+  className="animated-gradient group relative overflow-hidden px-8 py-4 rounded-xl text-white ..."
+>
+  <span>Book a Consultation</span>
+  <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+</motion.a>
             
-            <motion.button 
-              whileHover={{ scale: 1.02, backgroundColor: "rgba(29, 53, 87, 0.08)" }}
-              whileTap={{ scale: 0.98 }}
-              className="px-8 py-4 rounded-xl bg-[#1D3557]/5 border border-[#1D3557]/10 backdrop-blur-md text-[#1D3557] font-sans text-sm font-bold transition-all duration-300 flex items-center justify-center gap-2 group"
-            >
-              <span>Our Services</span>
-              <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
-            </motion.button>
+            <motion.a
+  href="#services"
+  whileHover={{ scale: 1.02, backgroundColor: "rgba(29, 53, 87, 0.08)" }}
+  whileTap={{ scale: 0.98 }}
+  className="px-8 py-4 rounded-xl bg-[#1D3557]/5 border border-[#1D3557]/10 backdrop-blur-md text-[#1D3557] font-sans text-sm font-bold transition-all duration-300 flex items-center justify-center gap-2 group"
+>
+  <span>Our Services</span>
+  <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+</motion.a>
           </div>
 
         </div>

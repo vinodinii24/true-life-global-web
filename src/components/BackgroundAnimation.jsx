@@ -27,11 +27,7 @@ export default function BackgroundAnimation() {
         y: ["-10vh", "15vh", "-10vh"],
         scale: [1, 1.1, 1],
       }}
-      transition={{
-        duration: 35,
-        repeat: Infinity,
-        ease: "easeInOut",
-      }}
+      
       className="absolute top-[-20%] left-[-10%] w-[65vw] h-[65vw] rounded-full mix-blend-multiply opacity-60"
       style={{
         background:

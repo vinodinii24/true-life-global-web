@@ -1,3 +1,4 @@
+import React from "react";
 import BackgroundAnimation from "./components/BackgroundAnimation";
 import Navbar from "./components/sections/Navbar";
 import HeroSection from "./components/sections/HeroSection";
@@ -15,11 +16,12 @@ import Contact from "./components/sections/Contact";
 
 function App() {
   return (
-    <div className="relative min-h-screen bg-white">
-
+    <>
+      {/* Absolute/Fixed Background Component Layer */}
       <BackgroundAnimation />
 
-      <div className="relative z-10">
+      {/* Main interactive page structure positioned safely on top of the animation */}
+      <div className="relative z-10 bg-transparent">
         <Navbar />
         <HeroSection />
         <AboutSection />
@@ -34,8 +36,7 @@ function App() {
         <FAQ />
         <Contact />
       </div>
-
-    </div>
+    </>
   );
 }
 

@@ -11,6 +11,7 @@ export default function AboutSection() {
     },
   };
 
+
   const cardVariants = {
     hidden: { opacity: 0, y: 40 },
     visible: {

@@ -55,7 +55,7 @@ export default function Contact() {
   return (
     <section 
       id="contact" 
-      className="relative bg-[#F8FAFC] text-[#0F172A] py-24 sm:py-32 overflow-hidden border-t border-slate-200"
+      className="relative bg-transparent text-[#0F172A] py-24 sm:py-32 overflow-hidden border-t border-slate-200"
       aria-labelledby="contact-heading"
     >
       <div className="absolute bottom-0 left-0 w-[60vw] h-[60vw] bg-[radial-gradient(circle,rgba(29,78,216,0.015),transparent_70%)] pointer-events-none" />

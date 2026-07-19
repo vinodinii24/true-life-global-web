@@ -1,13 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Menu, X, ArrowRight, Sun, Moon, Shield, ChevronDown } from 'lucide-react';
+import { Menu, X, ArrowRight, Shield, ChevronDown } from 'lucide-react';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
-  const theme = "dark";
-  const toggleTheme = () => {};
+  
   const navRef = useRef(null);
 
   useEffect(() => {
@@ -124,30 +123,20 @@ export default function Navbar() {
 
         {/* Global Operational Action Core */}
         <div className="flex items-center space-x-5">
-          <button
-            onClick={toggleTheme}
-            className="p-2.5 rounded-xl border border-border bg-white text-gray-500 hover:text-[#1D3557] hover:border-white/10 hover:bg-[#1D3557]/10 transition-all duration-300"
-            aria-label="Toggle structural theme state"
-          >
-            {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
-          </button>
-          
-          <button className="relative group overflow-hidden px-5 py-2.5 rounded-full bg-gradient-to-r from-[#1D3557] to-[#D4AF37] text-[#030712] font-sans text-xs font-bold tracking-wider uppercase shadow-lg shadow-[#00f2fe]/10 hover:shadow-[#00f2fe]/20 transition-all duration-300 hover:scale-[1.03]">
-            <span className="relative z-10 flex items-center gap-1.5">
-              Get a Free Quote <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
-            </span>
-            <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-15 transition-opacity duration-300 pointer-events-none" />
-          </button>
+         <a
+  href="#contact"
+  className="relative group overflow-hidden px-5 py-2.5 rounded-full bg-gradient-to-r from-[#1D3557] to-[#D4AF37] text-white font-sans text-xs font-bold tracking-wider uppercase shadow-lg transition-all duration-300 hover:scale-[1.03] inline-flex items-center justify-center"
+>
+  <span className="relative z-10 flex items-center gap-2">
+    Contact Us
+    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+  </span>
+</a>
         </div>
 
         {/* Mobile Control Anchor */}
         <div className="xl:hidden flex items-center space-x-4 z-50">
-          <button
-            onClick={toggleTheme}
-            className="p-2 rounded-lg bg-white border border-border text-gray-500"
-          >
-            {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
-          </button>
+          
           <button
             onClick={() => setIsOpen(!isOpen)}
             className="p-2 text-[#1D3557] bg-white border border-border rounded-lg transition-colors"
@@ -200,10 +189,14 @@ export default function Navbar() {
             </div>
 
             <div className="flex flex-col space-y-4 mt-8">
-              <button className="w-full py-4 rounded-xl bg-gradient-to-r from-[#1D3557] to-[#D4AF37] text-[#030712] font-bold text-center flex items-center justify-center gap-2">
-                <span>Get a Free Quote</span>
-                <ArrowRight className="w-4 h-4" />
-              </button>
+              <a
+  href="#contact"
+  onClick={() => setIsOpen(false)}
+  className="w-full py-4 rounded-xl bg-gradient-to-r from-[#1D3557] to-[#D4AF37] text-[#030712] font-bold text-center flex items-center justify-center gap-2"
+>
+  <span>Get in Touch</span>
+  <ArrowRight className="w-4 h-4" />
+</a>
               <div className="text-center text-xs text-gray-500 font-mono tracking-widest uppercase">
                 SECURE_GATEWAY // EXECUTION STATE
               </div>

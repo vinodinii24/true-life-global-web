@@ -2,10 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 @layer base {
-  html {
-    scroll-behavior: auto !important;
-  }
-
+  
   body {
     margin: 0;
     font-family: "Plus Jakarta Sans", sans-serif;
@@ -41,10 +38,136 @@
   height: auto;
 }
 
-.lenis-smooth {
-  scroll-behavior: auto !important;
-}
+
 
 .lenis-stopped {
   overflow: hidden;
+}
+html {
+  scroll-behavior: smooth;
+}
+::selection {
+  background: #1D4ED8;
+  color: white;
+}
+
+::-moz-selection {
+  background: #1D4ED8;
+  color: white;
+}
+
+* {
+  transition:
+    color .25s ease,
+    background-color .25s ease,
+    border-color .25s ease,
+    box-shadow .25s ease;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f8fafc;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(#1D3557,#D4AF37);
+  border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(#1D4ED8,#D4AF37);
+}
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid #1D4ED8;
+  outline-offset: 3px;
+}
+img {
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+body {
+  animation: pageFade .6s ease;
+}
+
+@keyframes pageFade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.glass {
+  background: rgba(255,255,255,.65);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255,255,255,.3);
+}
+.gradient-text {
+  background: linear-gradient(90deg,#1D3557,#1D4ED8,#D4AF37);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.btn-glow:hover {
+  box-shadow:
+    0 12px 30px rgba(29,78,216,.25),
+    0 0 20px rgba(212,175,55,.25);
+}
+
+@keyframes floating {
+  0%,100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.float {
+  animation: floating 5s ease-in-out infinite;
+}
+.bg-glow {
+  position: relative;
+}
+
+.bg-glow::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle,#1D4ED810,transparent 70%);
+  pointer-events: none;
+}
+
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+.animated-gradient {
+  background: linear-gradient(
+    90deg,
+    #1D3557,
+    #D4AF37,
+    #1D3557
+  );
+
+  background-size: 250% 100%;
+  animation: gradientMove 4s linear infinite;
 }

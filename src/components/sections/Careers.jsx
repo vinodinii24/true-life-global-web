@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { GraduationCap, BriefcaseBusiness, UsersRound, ArrowRight } from 'lucide-react';
+import { GraduationCap, BriefcaseBusiness, UsersRound } from 'lucide-react';
 
 const careerBenefits = [
   {
@@ -72,7 +72,7 @@ export default function Careers() {
               
               <div className="w-12 h-1 bg-[#1D4ED8] rounded-full mb-8" />
               
-              <div className="space-y-4 text-slate-600 font-sans text-sm sm:text-base leading-relaxed font-medium mb-10">
+              <div className="space-y-4 text-slate-600 font-sans text-sm sm:text-base leading-relaxed font-medium">
                 <p className="text-[#0F172A] font-bold text-lg">
                   More than a job, it's an opportunity.
                 </p>
@@ -83,17 +83,6 @@ export default function Careers() {
                   Whether you are an experienced professional or a recent graduate eager to launch your career, True Life Global presents outstanding prospects for growth in accounting, tax, and business services.
                 </p>
               </div>
-
-              <motion.a
-                href="mailto:careers@truelifeglobal.com"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="inline-flex items-center justify-center px-8 py-4 rounded-xl bg-[#1D4ED8] text-white font-sans text-base font-bold shadow-[0_4px_14px_rgba(29,78,216,0.25)] hover:shadow-[0_0_20px_rgba(212,175,55,0.4)] transition-all duration-300 group"
-                aria-label="Apply Now for an outstanding career opportunity"
-              >
-                Apply Now
-                <ArrowRight className="w-5 h-5 ml-3 transition-transform duration-300 group-hover:translate-x-1.5" aria-hidden="true" />
-              </motion.a>
             </motion.div>
           </div>
 
@@ -113,7 +102,7 @@ export default function Careers() {
                     key={index}
                     variants={itemVariants}
                     whileHover={{ x: 6, transition: { duration: 0.2, ease: "easeOut" } }}
-                    className="group relative bg-slate border border-slate-200 p-6 sm:p-8 rounded-3xl shadow-[0_8px_30px_rgba(15,23,42,0.01)] flex flex-col sm:flex-row items-start gap-6 transition-all duration-300 hover:border-[#1D4ED8] hover:shadow-[0_15px_40px_rgba(15,23,42,0.03)]"
+                    className="group relative bg-white border border-slate-200 p-6 sm:p-8 rounded-3xl shadow-[0_8px_30px_rgba(15,23,42,0.01)] flex flex-col sm:flex-row items-start gap-6 transition-all duration-300 hover:border-[#1D4ED8] hover:shadow-[0_15px_40px_rgba(15,23,42,0.03)]"
                   >
                     <div className="w-12 h-12 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/20 flex items-center justify-center text-[#D4AF37] shrink-0 transition-all duration-300 group-hover:bg-[#1D4ED8] group-hover:text-white group-hover:border-[#1D4ED8]">
                       <IconComponent className="w-5 h-5 transition-transform duration-300 group-hover:scale-110" aria-hidden="true" />
@@ -133,7 +122,7 @@ export default function Careers() {
                       </p>
                     </div>
 
-                    <div className="absolute top-1/2 -translate-y-1/2 right-4 w-1 h-8 rounded-full bg-slate group-hover:bg-[#D4AF37] transition-colors duration-300 hidden sm:block" />
+                    <div className="absolute top-1/2 -translate-y-1/2 right-4 w-1 h-8 rounded-full bg-slate-200 group-hover:bg-[#D4AF37] transition-colors duration-300 hidden sm:block" />
                   </motion.article>
                 );
               })}

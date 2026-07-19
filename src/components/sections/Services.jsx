@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Calculator, ClipboardCheck, TrendingUp, Truck, ArrowRight } from 'lucide-react';
+import { Calculator, ClipboardCheck, TrendingUp, Truck } from 'lucide-react';
 
 const servicesData = [
   {
@@ -136,22 +136,12 @@ export default function ServicesSection() {
                     {service.title}
                   </h3>
                   
-                  <p className="font-sans text-sm text-text-muted leading-relaxed mb-8 font-medium">
+                  <p className="font-sans text-sm text-[#9ca3af] leading-relaxed font-medium">
                     {service.description}
                   </p>
                 </div>
 
-                {/* Micro Action Interactive Core */}
-                <div className="pt-4 border-t border-border">
-                  <button 
-                    className="inline-flex items-center text-xs font-bold font-mono tracking-wider uppercase group/btn transition-colors duration-300"
-                    style={{ color: service.color }}
-                    aria-label={`Learn more about ${service.title}`}
-                  >
-                    <span>Learn More</span>
-                    <ArrowRight className="w-4 h-4 ml-2 transition-transform duration-300 group-hover/btn:translate-x-1.5" />
-                  </button>
-                </div>
+                
 
                 {/* Master Interactive High-Fidelity Outer Border Highlight */}
                 <div 

@@ -1,11 +1,12 @@
 import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 
-export const AnimatedCursor = () => {
+export default function AnimatedCursor() {
   const dotRef = useRef(null);
   const ringRef = useRef(null);
 
   useEffect(() => {
+    // Disable custom cursor on touch/mobile devices
     if (window.matchMedia('(max-width: 768px)').matches) {
       return;
     }
@@ -13,92 +14,105 @@ export const AnimatedCursor = () => {
     const dot = dotRef.current;
     const ring = ringRef.current;
 
+    if (!dot || !ring) return;
+
+    // Set initial position out of view with zero opacity
     gsap.set([dot, ring], { xPercent: -50, yPercent: -50, opacity: 0 });
 
+    // High performance GSAP quickTo setters
+    const xDotTo = gsap.quickTo(dot, "x", { duration: 0.08, ease: "power3.out" });
+    const yDotTo = gsap.quickTo(dot, "y", { duration: 0.08, ease: "power3.out" });
+    const xRingTo = gsap.quickTo(ring, "x", { duration: 0.3, ease: "power3.out" });
+    const yRingTo = gsap.quickTo(ring, "y", { duration: 0.3, ease: "power3.out" });
+
+    let isVisible = false;
+
     const onMouseMove = (e) => {
-      const { clientX: x, clientY: y } = e;
+      const { clientX: x, clientY: y, target } = e;
 
-      gsap.to(dot, {
-        x,
-        y,
-        duration: 0.1,
-        overwrite: 'auto',
-        onStart: () => gsap.set(dot, { opacity: 1 })
-      });
+      if (!isVisible) {
+        gsap.to([dot, ring], { opacity: 1, duration: 0.2 });
+        isVisible = true;
+      }
 
-      gsap.to(ring, {
-        x,
-        y,
-        duration: 0.4,
-        ease: 'power3.out',
-        overwrite: 'auto',
-        onStart: () => gsap.set(ring, { opacity: 1 })
-      });
-    };
+      xDotTo(x);
+      yDotTo(y);
+      xRingTo(x);
+      yRingTo(y);
 
-    const onMouseEnter = () => {
-      gsap.to([dot, ring], { opacity: 1, duration: 0.2 });
+      // Event Delegation: Check if hovered element or parent is interactive
+      const isInteractive = target && (
+        target.closest('a, button, input, select, textarea, [role="button"]') !== null ||
+        window.getComputedStyle(target).cursor === 'pointer'
+      );
+
+      if (isInteractive) {
+        gsap.to(ring, {
+          scale: 1.8,
+          backgroundColor: 'rgba(212, 175, 55, 0.15)',
+          borderColor: '#FFD700',
+          duration: 0.2,
+          overwrite: "auto"
+        });
+        gsap.to(dot, { scale: 0, duration: 0.2, overwrite: "auto" });
+      } else {
+        gsap.to(ring, {
+          scale: 1,
+          backgroundColor: 'transparent',
+          borderColor: 'rgba(212, 175, 55, 0.6)',
+          duration: 0.2,
+          overwrite: "auto"
+        });
+        gsap.to(dot, { scale: 1, duration: 0.2, overwrite: "auto" });
+      }
     };
 
     const onMouseLeave = () => {
       gsap.to([dot, ring], { opacity: 0, duration: 0.2 });
+      isVisible = false;
     };
 
     const onMouseDown = () => {
-      gsap.to(ring, { scale: 0.7, borderColor: '#00f2fe', duration: 0.15 });
-      gsap.to(dot, { scale: 1.5, backgroundColor: '#4facfe', duration: 0.15 });
+      gsap.to(ring, { scale: 0.7, borderColor: '#FFD700', duration: 0.15 });
+      gsap.to(dot, { scale: 1.5, backgroundColor: '#FFD700', duration: 0.15 });
     };
 
     const onMouseUp = () => {
-      gsap.to(ring, { scale: 1, borderColor: 'rgba(79, 172, 254, 0.4)', duration: 0.25 });
-      gsap.to(dot, { scale: 1, backgroundColor: '#00f2fe', duration: 0.25 });
+      gsap.to(ring, { scale: 1, borderColor: 'rgba(212, 175, 55, 0.6)', duration: 0.2 });
+      gsap.to(dot, { scale: 1, backgroundColor: '#D4AF37', duration: 0.2 });
     };
 
-    const addHoverTargets = () => {
-      const interactives = document.querySelectorAll('a, button, [role="button"], input, select, textarea');
-      interactives.forEach((el) => {
-        el.addEventListener('mouseenter', () => {
-          gsap.to(ring, { scale: 1.6, backgroundColor: 'rgba(0, 242, 254, 0.05)', borderColor: '#00f2fe', duration: 0.2 });
-          gsap.to(dot, { scale: 0, duration: 0.2 });
-        });
-        el.addEventListener('mouseleave', () => {
-          gsap.to(ring, { scale: 1, backgroundColor: 'transparent', borderColor: 'rgba(79, 172, 254, 0.4)', duration: 0.2 });
-          gsap.to(dot, { scale: 1, duration: 0.2 });
-        });
-      });
-    };
-
-    window.addEventListener('mousemove', onMouseMove);
-    document.addEventListener('mouseenter', onMouseEnter);
+    window.addEventListener('mousemove', onMouseMove, { passive: true });
     document.addEventListener('mouseleave', onMouseLeave);
     window.addEventListener('mousedown', onMouseDown);
     window.addEventListener('mouseup', onMouseUp);
-    
-    addHoverTargets();
-
-    const observer = new MutationObserver(addHoverTargets);
-    observer.observe(document.body, { childList: true, subtree: true });
 
     return () => {
       window.removeEventListener('mousemove', onMouseMove);
-      document.removeEventListener('mouseenter', onMouseEnter);
       document.removeEventListener('mouseleave', onMouseLeave);
       window.removeEventListener('mousedown', onMouseDown);
       window.removeEventListener('mouseup', onMouseUp);
-      observer.disconnect();
     };
   }, []);
 
   return (
     <>
+      {/* Center Gold Dot */}
       <div
         ref={dotRef}
-        className="fixed top-0 left-0 w-2 h-2 bg-[#00f2fe] rounded-full pointer-events-none z-[999999] hidden md:block mix-blend-screen shadow-[0_0_8px_#00f2fe]"
+        className="fixed top-0 left-0 w-2.5 h-2.5 bg-[#D4AF37] rounded-full pointer-events-none z-[999999] hidden md:block shadow-[0_0_12px_#FFD700]"
       />
+
+      {/* Dynamic Gold Orbit Ring */}
       <div
         ref={ringRef}
-        className="fixed top-0 left-0 w-9 h-9 border border-[#4facfe]/40 rounded-full pointer-events-none z-[999998] hidden md:block mix-blend-screen"
-      />
+        className="fixed top-0 left-0 w-10 h-10 border border-[#D4AF37]/60 rounded-full pointer-events-none z-[999998] hidden md:block"
+      >
+        {/* 🧪 DEBUG TEST ANIMATION: Gold Orbiting Satellite Dot inside cursor */}
+        <span 
+          className="absolute -top-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-[#FFD700] animate-ping pointer-events-none" 
+        />
+      </div>
     </>
   );
-};
+}

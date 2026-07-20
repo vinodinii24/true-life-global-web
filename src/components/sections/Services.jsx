@@ -1,194 +1,228 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Calculator, ClipboardCheck, TrendingUp, Truck } from 'lucide-react';
+import React, { useRef } from 'react';
+import { motion, useMotionValue, useTransform, useSpring, useScroll } from 'framer-motion';
+import { Calculator, FileSearch, Receipt, Briefcase, ArrowRight, ShieldCheck } from 'lucide-react';
 
-const servicesData = [
+const SERVICES_DATA = [
   {
-    title: "Accounting & Bookkeeping",
-    description: "Accurate, timely bookkeeping and financial record management to keep your accounts in perfect order and ready for IRAS reporting.",
     icon: Calculator,
-    color: "#1D4ED8", 
-    gradient: "from-[#1D4ED8]/15 via-[#1D4ED8]/5 to-transparent"
+    title: "Accounting & Bookkeeping",
+    subtitle: "Financial Clarity & Compliance",
+    description: "End-to-end accounting services compliant with Singapore Financial Reporting Standards (SFRS). We maintain precise ledgers, deliver monthly insights, and optimize reporting structures.",
+    features: ["SFRS Compliant Ledger", "Management Reports", "Payroll Management"]
   },
   {
-    title: "Auditing Services",
-    description: "Independent audits conducted with rigor and corporate transparency, ensuring your financial statements meet Singapore statutory standards.",
-    icon: ClipboardCheck,
-    color: "#4FACFE", 
-    gradient: "from-[#4FACFE]/15 via-[#4FACFE]/5 to-transparent"
+    icon: FileSearch,
+    title: "Audit & Assurance",
+    subtitle: "Risk Management & Integrity",
+    description: "Independent audit solutions designed to reinforce stakeholder confidence, fulfill statutory ACRA obligations, and systematically identify operational risk factors.",
+    features: ["Statutory Audits", "Internal Audits", "Risk Mitigation"]
   },
   {
-    title: "Financial Advisory",
-    description: "Practical financial planning and structural business advisory support to help you make informed decisions and grow with confidence.",
-    icon: TrendingUp,
-    color: "#D4AF37", 
-    gradient: "from-[#D4AF37]/15 via-[#D4AF37]/5 to-transparent"
+    icon: Receipt,
+    title: "Tax Advisory & Filing",
+    subtitle: "IRAS Strategic Compliance",
+    description: "Comprehensive corporate tax planning, Corporate Income Tax (Form C-S/C) filing, and GST compliance tailored to optimize tax positions under Singapore regulations.",
+    features: ["Corporate Income Tax", "GST Filing & Planning", "Cross-Border Tax"]
   },
   {
-    title: "Courier Services",
-    description: "Reliable document and parcel delivery within Singapore ideal for businesses needing secure, time-sensitive corporate solutions.",
-    icon: Truck,
-    color: "#1E3A8A", 
-    gradient: "from-[#1E3A8A]/15 via-[#1E3A8A]/5 to-transparent"
+    icon: Briefcase,
+    title: "Corporate Secretarial",
+    subtitle: "Governance & ACRA Administration",
+    description: "Full-spectrum corporate secretarial administration ensuring full compliance with ACRA regulations, maintaining registers, and handling annual filings.",
+    features: ["ACRA Compliance", "Company Incorporation", "Annual Returns"]
   }
 ];
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.05
-    }
-  }
-};
+// --- Interactive 3D Glassmorphic Service Card ---
+function ServiceCard({ service, index }) {
+  const cardRef = useRef(null);
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
 
-const cardVariants = {
-  hidden: { y: 40, opacity: 0, scale: 0.97 },
-  visible: {
-    y: 0,
-    opacity: 1,
-    scale: 1,
-    transition: {
-      type: "spring",
-      stiffness: 80,
-      damping: 15,
-      mass: 0.9
-    }
-  }
-};
+  const rotateX = useSpring(useTransform(y, [-0.5, 0.5], [10, -10]), { stiffness: 200, damping: 20 });
+  const rotateY = useSpring(useTransform(x, [-0.5, 0.5], [-10, 10]), { stiffness: 200, damping: 20 });
 
-export default function ServicesSection() {
+  const handleMouseMove = (e) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const width = rect.width;
+    const height = rect.height;
+    const mouseX = e.clientX - rect.left;
+    const mouseY = e.clientY - rect.top;
+
+    x.set(mouseX / width - 0.5);
+    y.set(mouseY / height - 0.5);
+  };
+
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+  };
+
+  const Icon = service.icon;
+
   return (
-    <section 
-      id="services" 
-      className="relative bg-transparent text-slate-800 py-24 sm:py-32 overflow-hidden perspective-1000"
-      aria-labelledby="services-heading"
+    <motion.div
+      ref={cardRef}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
+      initial={{ opacity: 0, y: 50, scale: 0.94, filter: "blur(8px)" }}
+      whileInView={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
+      viewport={{ once: true, margin: "-60px" }}
+      transition={{ duration: 0.85, delay: index * 0.15, ease: [0.16, 1, 0.3, 1] }}
+      className="group relative rounded-2xl bg-white/[0.04] border border-white/10 hover:border-[#D4AF37]/60 p-8 backdrop-blur-xl transition-all duration-500 shadow-[0_10px_30px_rgba(0,0,0,0.5)] hover:shadow-[0_20px_40px_rgba(212,175,55,0.15)] flex flex-col justify-between transform-gpu hover:-translate-y-2"
     >
-      {/* Dynamic Background Fluidity Rings */}
-      <motion.div 
-        animate={{ 
-          y: [0, 40, 0],
-          x: [0, -20, 0],
-          scale: [1, 1.08, 1] 
-        }}
-        transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-1/3 right-[-10%] w-[500px] h-[500px] bg-slate-100/40 rounded-full blur-3xl pointer-events-none -z-10"
-      />
-      <motion.div 
-        animate={{ 
-          y: [0, -30, 0],
-          x: [0, 30, 0],
-          scale: [1, 1.15, 1] 
-        }}
-        transition={{ duration: 18, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-        className="absolute bottom-0 left-[-5%] w-[400px] h-[400px] bg-[#1D4ED8]/5 rounded-full blur-3xl pointer-events-none -z-10"
-      />
+      {/* Light Reflection Sweep Effect */}
+      <div className="absolute inset-0 rounded-2xl bg-gradient-to-tr from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
-        
-        {/* Section Header Framework */}
-        <div className="text-center max-w-3xl mx-auto mb-20">
-          <motion.div 
-            initial={{ opacity: 0, y: 25 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="flex flex-col items-center"
-          >
-            <span className="font-sans text-xs font-bold tracking-[6px] text-[#D4AF37] uppercase mb-4 block">
-              Capabilities Layer
-            </span>
-            <h2 
-              id="services-heading" 
-              className="font-sans text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-[#1D3557] mb-6"
-            >
-              Our Services
-            </h2>
-            
-            {/* Animated Underline Element */}
-            <motion.div 
-              initial={{ width: 0, opacity: 0 }}
-              whileInView={{ width: "80px", opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2, duration: 0.6 }}
-              className="h-[2px] bg-gradient-to-r from-[#1D4ED8] to-[#D4AF37] rounded-full mb-6" 
-            />
-            
-            <p className="font-sans text-base sm:text-lg text-slate-600 leading-relaxed font-normal">
-              Professional business solutions designed to help Singapore enterprises operate efficiently, remain fully compliant, and achieve sustainable growth.
-            </p>
-          </motion.div>
+      <div style={{ transform: "translateZ(30px)" }}>
+        <div className="flex items-center justify-between mb-6">
+          <div className="w-14 h-14 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-[#D4AF37] group-hover:border-[#D4AF37]/60 group-hover:bg-[#D4AF37]/10 group-hover:shadow-[0_0_20px_rgba(212,175,55,0.3)] transition-all duration-500">
+            <Icon className="w-6 h-6 transition-transform duration-500 group-hover:rotate-6 group-hover:scale-110 text-[#D4AF37]" />
+          </div>
+          <span className="text-[10px] font-bold tracking-widest text-slate-300 uppercase bg-white/5 px-3 py-1 rounded-full border border-white/10">
+            Service 0{index + 1}
+          </span>
         </div>
 
-        {/* Tactical Services Architecture Grid */}
-        <motion.div 
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-80px" }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch"
+        <h3 className="font-sans text-2xl font-bold text-white tracking-tight mb-1 group-hover:text-[#D4AF37] transition-colors duration-300">
+          {service.title}
+        </h3>
+        <p className="text-xs font-semibold text-[#FFD700] tracking-wider uppercase mb-4 drop-shadow-[0_0_6px_rgba(212,175,55,0.3)]">
+          {service.subtitle}
+        </p>
+
+        <p className="font-sans text-sm text-slate-300/80 leading-relaxed mb-6 font-medium">
+          {service.description}
+        </p>
+
+        <ul className="space-y-2 mb-8 border-t border-white/10 pt-4">
+          {service.features.map((feature, fIdx) => (
+            <motion.li
+              key={fIdx}
+              initial={{ opacity: 0, x: -10 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.15 + fIdx * 0.08 }}
+              className="flex items-center text-xs text-slate-200 font-medium"
+            >
+              <ShieldCheck className="w-3.5 h-3.5 text-[#D4AF37] mr-2 shrink-0" />
+              <span>{feature}</span>
+            </motion.li>
+          ))}
+        </ul>
+      </div>
+
+      <div style={{ transform: "translateZ(20px)" }} className="pt-4 border-t border-white/10">
+        <a
+          href="#contact"
+          className="inline-flex items-center gap-2 text-xs font-bold text-white group-hover:text-[#D4AF37] transition-colors duration-300"
         >
-          {servicesData.map((service, index) => {
-            const IconComponent = service.icon;
-            return (
-              <motion.article
+          <span>Enquire Now</span>
+          <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1 text-[#D4AF37]" />
+        </a>
+      </div>
+    </motion.div>
+  );
+}
+
+// --- Main Services Section ---
+export default function ServicesSection() {
+  const sectionRef = useRef(null);
+
+  // Parallax Depth Tracking
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+
+  const headerY = useTransform(scrollYProgress, [0, 1], [-20, 20]);
+  const cardsY = useTransform(scrollYProgress, [0, 1], [30, -30]);
+
+  const labelText = "WHAT WE DELIVER";
+
+  return (
+    <section 
+      ref={sectionRef}
+      id="services" 
+      className="relative py-28 sm:py-36 px-6 bg-transparent text-white overflow-hidden select-none"
+    >
+      {/* Soft Vignette Overlay for Contrast (Retains 3D Background Visibility) */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#050b18]/40 to-transparent pointer-events-none z-0" />
+
+      <div className="max-w-7xl mx-auto relative z-20">
+        
+        {/* Section Header */}
+        <motion.div style={{ y: headerY }} className="text-center max-w-3xl mx-auto mb-20">
+          
+          {/* Animated Category Label */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={{
+              hidden: { opacity: 0 },
+              visible: {
+                opacity: 1,
+                transition: { staggerChildren: 0.04 },
+              },
+            }}
+            className="flex items-center justify-center gap-1 mb-3"
+          >
+            {labelText.split("").map((char, index) => (
+              <motion.span
                 key={index}
-                variants={cardVariants}
-                whileHover={{ 
-                  y: -8, 
-                  scale: 1.02,
-                  rotateX: 3,
-                  rotateY: -3,
-                  boxShadow: "0 20px 40px -15px rgba(29, 53, 87, 0.15)"
+                variants={{
+                  hidden: { opacity: 0, y: 8, filter: "blur(4px)" },
+                  visible: { opacity: 1, y: 0, filter: "blur(0px)" },
                 }}
-                whileTap={{ scale: 0.99 }}
-                className="group relative flex flex-col justify-between p-8 rounded-3xl bg-white border border-slate-200/70 backdrop-blur-xl overflow-hidden shadow-sm transition-all duration-300 transform-style-3d hover:border-slate-300/90"
+                className="font-sans text-xs font-bold tracking-[6px] text-[#D4AF37] uppercase drop-shadow-[0_0_8px_rgba(212,175,55,0.4)]"
               >
-                {/* Micro Ambient Card Radial Glow */}
-                <div className={`absolute -top-20 -left-20 w-40 h-40 bg-gradient-to-br ${service.gradient} rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none`} />
+                {char === " " ? "\u00A0" : char}
+              </motion.span>
+            ))}
+          </motion.div>
 
-                <div className="transform-translate-z">
-                  {/* Dynamic Modular Badge Icon */}
-                  <motion.div 
-                    whileHover={{ scale: 1.08, rotate: 6 }}
-                    className="w-14 h-14 rounded-2xl flex items-center justify-center mb-8 relative border border-slate-100 bg-slate-50 transition-colors duration-300 group-hover:bg-white shadow-sm"
-                  >
-                    <div 
-                      className="absolute inset-0 opacity-0 group-hover:opacity-10 rounded-2xl blur-md transition-all duration-300"
-                      style={{ backgroundColor: service.color }} 
-                    />
-                    <IconComponent 
-                      className="w-6 h-6 transition-transform duration-300" 
-                      style={{ color: service.color }}
-                      aria-hidden="true"
-                    />
-                  </motion.div>
+          {/* Heading with Metallic Gold Sweep */}
+          <h2 className="font-sans text-3xl sm:text-5xl font-black text-white tracking-tight mb-6">
+            Our Core{" "}
+            <span className="relative inline-block text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] via-[#FFD700] to-[#AA7C11] overflow-hidden drop-shadow-[0_0_15px_rgba(212,175,55,0.3)]">
+              Corporate Services
+              <motion.span
+                animate={{ x: ["-100%", "200%"] }}
+                transition={{ duration: 2, repeat: Infinity, repeatDelay: 6, ease: "easeInOut" }}
+                className="absolute inset-0 w-1/2 bg-gradient-to-r from-transparent via-white/60 to-transparent skew-x-12 pointer-events-none"
+              />
+            </span>
+          </h2>
 
-                  {/* Context Info Typography */}
-                  <h3 className="font-sans text-xl font-bold text-[#1D3557] mb-4 tracking-tight transition-colors duration-300 group-hover:text-[#1D4ED8]">
-                    {service.title}
-                  </h3>
-                  
-                  <p className="font-sans text-sm text-slate-500 leading-relaxed font-medium">
-                    {service.description}
-                  </p>
-                </div>
+          {/* Gold Accent Divider */}
+          <motion.div
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: "easeInOut" }}
+            className="h-[2px] w-24 bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent mx-auto mb-6 shadow-[0_0_10px_#D4AF37]"
+          />
 
-                {/* Master Interactive High-Fidelity Outer Border Highlight */}
-                <motion.div 
-                  initial={{ scaleX: 0 }}
-                  whileHover={{ scaleX: 1 }}
-                  transition={{ duration: 0.4, ease: "easeOut" }}
-                  className="absolute inset-x-0 bottom-0 h-[3px] origin-left pointer-events-none"
-                  style={{ backgroundImage: `linear-gradient(to right, ${service.color}, transparent)` }}
-                />
-              </motion.article>
-            );
-          })}
+          <motion.p
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, delay: 0.2 }}
+            className="font-sans text-base sm:text-lg text-slate-200/90 leading-relaxed font-normal max-w-2xl mx-auto"
+          >
+            We deliver high-precision financial, statutory, and corporate management solutions geared for Singapore enterprises and global multi-nationals.
+          </motion.p>
         </motion.div>
 
+        {/* 3D Interactive Service Cards Grid */}
+        <motion.div style={{ y: cardsY }} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
+          {SERVICES_DATA.map((service, index) => (
+            <ServiceCard key={index} service={service} index={index} />
+          ))}
+        </motion.div>
       </div>
     </section>
   );

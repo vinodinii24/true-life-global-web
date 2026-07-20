@@ -1,8 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { motion, useScroll, useSpring } from "framer-motion";
-import BackgroundAnimation from "./components/BackgroundAnimation";
-import WaveDivider from "./components/WaveDivider";
+import Lenis from "lenis";
 
+// Living 3D Animated Background Engine
+import GlobalBackground from "./components/background/GlobalBackground";
+
+// UI Components
+import WaveDivider from "./components/ui/WaveDivider";
+import AnimatedCursor from "./components/ui/AnimatedCursor";
+import LoadingScreen from "./components/ui/LoadingScreen";
+
+// Sections
 import Navbar from "./components/sections/Navbar";
 import HeroSection from "./components/sections/HeroSection";
 import AboutSection from "./components/sections/AboutSection";
@@ -17,166 +25,102 @@ import FAQ from "./components/sections/FAQ";
 import Contact from "./components/sections/Contact";
 
 function App() {
-  // Cinematic high-performance scroll tracking via Framer Motion
+  // Initialize dynamic global smooth scroll momentum tracking via Lenis
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      orientation: "vertical",
+      gestureOrientation: "vertical",
+      smoothWheel: true,
+      wheelMultiplier: 1,
+      touchMultiplier: 2,
+    });
+
+    let rafId;
+    function raf(time) {
+      lenis.raf(time);
+      rafId = requestAnimationFrame(raf);
+    }
+
+    rafId = requestAnimationFrame(raf);
+
+    return () => {
+      cancelAnimationFrame(rafId);
+      lenis.destroy();
+    };
+  }, []);
+
+  // Cinematic scroll progress bar tracking
   const { scrollYProgress } = useScroll();
-  
-  // Creates an ultra-smooth spring effect similar to Apple/Linear site scrollbars
+
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
     damping: 30,
-    restDelta: 0.001
+    restDelta: 0.001,
   });
-
-  // Presentation variant configuration applied to stage sections smoothly on scroll
-  const presentationVariants = {
-    hidden: { opacity: 0, y: 30, filter: "blur(4px)" },
-    visible: { 
-      opacity: 1, 
-      y: 0, 
-      filter: "blur(0px)",
-      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } 
-    }
-  };
-
-  const viewportConfig = { once: true, amount: 0.12 };
 
   return (
     <>
-      {/* Premium Top Scroll Progress Bar - High Performance GPU Bound */}
-      <div className="fixed top-0 left-0 right-0 h-1 z-50 pointer-events-none bg-slate-100/50 backdrop-blur-sm">
+      {/* Interactive Custom Cursor */}
+      <AnimatedCursor />
+
+      {/* Initial Page Loading Presentation */}
+      <LoadingScreen />
+
+      {/* Top Scroll Progress Bar */}
+      <div className="fixed top-0 left-0 right-0 h-[3px] z-[100] pointer-events-none bg-slate-900/40">
         <motion.div
-          className="h-full bg-gradient-to-r from-[#1D3557] via-[#1D4ED8] to-[#D4AF37] origin-left"
-          style={{ scaleX }}
+          className="h-full bg-gradient-to-r from-[#1D3557] via-[#D4AF37] to-[#FFD700] shadow-[0_0_10px_#D4AF37]"
+          style={{ scaleX, transformOrigin: "0% 50%" }}
         />
       </div>
 
-      {/* Global Background Animation */}
-      <BackgroundAnimation />
+      {/* Global Living 3D Animated Background (Globe + Waves + Particles) */}
+      <GlobalBackground />
 
-      {/* Main Website Content - Smooth Entrance Presentation */}
-      <motion.div 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-        className="relative z-10 bg-transparent antialiased selection:bg-[#1D4ED8]/10 selection:text-[#1D3557]"
-      >
+      {/* Main Floating Website Content Layer */}
+      <div className="relative z-10 bg-transparent antialiased text-slate-100 selection:bg-[#D4AF37]/20 selection:text-[#FFD700] overflow-x-clip">
         <Navbar />
 
-        <HeroSection />
+        <main>
+          <HeroSection />
+          <WaveDivider />
 
-        <WaveDivider />
-
-        <motion.div 
-          variants={presentationVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewportConfig}
-          className="will-change-transform"
-        >
           <AboutSection />
-        </motion.div>
-
-        <motion.div 
-          variants={presentationVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewportConfig}
-          className="will-change-transform"
-        >
           <Services />
-        </motion.div>
+          <WaveDivider />
 
-        <WaveDivider />
-
-        <motion.div 
-          variants={presentationVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewportConfig}
-          className="will-change-transform"
-        >
           <Howwework />
-        </motion.div>
-
-        <motion.div 
-          variants={presentationVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewportConfig}
-          className="will-change-transform"
-        >
           <Leadership />
-        </motion.div>
+          <WaveDivider />
 
-        <WaveDivider />
-
-        <motion.div 
-          variants={presentationVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewportConfig}
-          className="will-change-transform"
-        >
           <WhyChooseUs />
-        </motion.div>
-
-        {/* Keeping the first "What Our Clients Say" section component */}
-        <motion.div 
-          variants={presentationVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewportConfig}
-          className="will-change-transform"
-        >
           <VisionMission />
-        </motion.div>
+          <WaveDivider />
 
-        <WaveDivider />
-
-        <motion.div 
-          variants={presentationVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewportConfig}
-          className="will-change-transform"
-        >
           <Insights />
-        </motion.div>
+          <WaveDivider />
 
-        <WaveDivider />
-
-        <motion.div 
-          variants={presentationVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewportConfig}
-          className="will-change-transform"
-        >
           <Careers />
-        </motion.div>
-
-        <motion.div 
-          variants={presentationVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewportConfig}
-          className="will-change-transform"
-        >
           <FAQ />
-        </motion.div>
+          <WaveDivider />
 
-        <WaveDivider />
-
-        <motion.div 
-          variants={presentationVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewportConfig}
-          className="will-change-transform"
-        >
           <Contact />
-        </motion.div>
-      </motion.div>
+        </main>
+      </div>
+
+      {/* Status Badge */}
+      <div
+        className="fixed top-20 right-5 z-[9999] pointer-events-none flex items-center justify-center gap-2 bg-[#050b18]/90 border border-[#D4AF37]/50 rounded-full px-3 py-1 shadow-[0_0_15px_rgba(212,175,55,0.3)] backdrop-blur-md"
+        aria-hidden="true"
+      >
+        <span className="relative flex h-2.5 w-2.5">
+          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#FFD700] opacity-75"></span>
+          <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#D4AF37]"></span>
+        </span>
+        <span className="text-[10px] tracking-widest text-[#FFD700] font-semibold uppercase">APP ONLINE</span>
+      </div>
     </>
   );
 }

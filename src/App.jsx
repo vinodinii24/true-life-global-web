@@ -1,4 +1,4 @@
-//import React, { useEffect } from "react";
+import React, { useEffect } from "react";
 import { motion, useScroll, useSpring } from "framer-motion";
 import Lenis from "lenis";
 

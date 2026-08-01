@@ -1,5 +1,5 @@
-//import React, { useEffect } from "react";
-//import { motion, useScroll, useSpring } from "framer-motion";
+import React, { useEffect } from "react";
+import { motion, useScroll, useSpring } from "framer-motion";
 import Lenis from "lenis";
 
 // Living 3D Animated Background Engine

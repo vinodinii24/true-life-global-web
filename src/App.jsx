@@ -1,5 +1,5 @@
-//import React, { useEffect } from "react";
-//import { motion, useScroll, useSpring } from "framer-motion";
+import React, { useEffect } from "react";
+import { motion, useScroll, useSpring } from "framer-motion";
 import Lenis from "lenis";
 
 // Living 3D Animated Background Engine
@@ -11,9 +11,9 @@ import AnimatedCursor from "./components/ui/AnimatedCursor";
 import LoadingScreen from "./components/ui/LoadingScreen";
 
 // Sections
-import Navbar from "./components/sections/Navbar";
-import HeroSection from "./components/sections/HeroSection";
-import AboutSection from "./components/sections/AboutSection";
+//import Navbar from "./components/sections/Navbar";
+//import HeroSection from "./components/sections/HeroSection";
+//import AboutSection from "./components/sections/AboutSection";
 import Services from "./components/sections/Services";
 import Howwework from "./components/sections/Howwework";
 import Leadership from "./components/sections/Leadership";
